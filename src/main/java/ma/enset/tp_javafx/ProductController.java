@@ -26,32 +26,68 @@ public class ProductController {
     private Text errorMessage;
 
     private ObservableList<Product> productList;
+    private Product selectedProduct;
 
     @FXML
     public void initialize() {
         productList = FXCollections.observableArrayList();
         productListView.setItems(productList);
+
+        productListView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedProduct = newValue;
+                nameField.setText(newValue.getName());
+                priceField.setText(String.valueOf(newValue.getPrice()));
+                errorMessage.setText("");
+            }
+        });
     }
 
     @FXML
-    private void addProduct() {
-        String name = nameField.getText();
-        String priceText = priceField.getText();
+    public void addProduct() {
+        String name = nameField.getText().trim();
+        String priceText = priceField.getText().trim();
 
         if (name.isEmpty() || priceText.isEmpty()) {
-            errorMessage.setText("Tous les champs sont obligatoires.");
+            errorMessage.setText("Champs requis manquants.");
             return;
         }
 
         try {
             double price = Double.parseDouble(priceText);
-            Product product = new Product(name, price);
-            productList.add(product);
+
+            if (selectedProduct != null) {
+                // Modifier produit existant
+                selectedProduct.setName(name);
+                selectedProduct.setPrice(price);
+                productListView.refresh(); // Mettre à jour l'affichage
+                selectedProduct = null;
+            } else {
+                // Ajouter nouveau produit
+                Product newProduct = new Product(name, price);
+                productList.add(newProduct);
+            }
+
             nameField.clear();
             priceField.clear();
             errorMessage.setText("");
+
         } catch (NumberFormatException e) {
-            errorMessage.setText("Le prix doit être un nombre valide.");
+            errorMessage.setText("Le prix doit être un nombre.");
+        }
+    }
+
+    @FXML
+    public void deleteProduct() {
+        Product selected = productListView.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            productList.remove(selected);
+            nameField.clear();
+            priceField.clear();
+            errorMessage.setText("");
+            selectedProduct = null;
+        } else {
+            errorMessage.setText("Aucun produit sélectionné.");
         }
     }
 }
