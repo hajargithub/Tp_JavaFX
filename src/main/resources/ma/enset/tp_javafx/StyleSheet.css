@@ -1,0 +1,18 @@
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2a9d8f;
+}
+
+.error-text {
+    -fx-fill: red;
+}
+
+.text-field, .button {
+    -fx-pref-width: 200px;
+}
+
+.list-view {
+    -fx-border-color: #2a9d8f;
+    -fx-border-width: 1;
+}

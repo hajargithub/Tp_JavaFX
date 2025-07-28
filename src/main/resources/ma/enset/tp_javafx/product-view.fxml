@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ma.enset.tp_javafx.ProductController">
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+
+            </padding>
+            <Label text="Gestion des Produits" styleClass="header-label"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10" padding="10">
+            <TextField fx:id="nameField" promptText="Nom du produit"/>
+            <TextField fx:id="priceField" promptText="Prix du produit"/>
+            <Button fx:id="addButton" text="Ajouter Produit" onAction="#addProduct"/>
+            <Text fx:id="errorMessage" styleClass="error-text"/>
+            <ListView fx:id="productListView" prefHeight="200"/>
+        </VBox>
+    </center>
+</BorderPane>
