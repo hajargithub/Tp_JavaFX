@@ -29,7 +29,7 @@ Une application JavaFX simple pour gérer une liste de produits. L'interface per
 ---
 
 ## 📦 Structure du projet
-
+```` bash 
 src/
 ├── ma/enset/tp_javafx/
 │ ├── Product.java # Classe modèle
@@ -37,3 +37,4 @@ src/
 │ ├── MainApplication.java # Point d’entrée JavaFX
 │ ├── product-view.fxml # Interface graphique FXML
 │ └── style.css # Feuille de style JavaFX
+````
